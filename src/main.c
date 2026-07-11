@@ -1,20 +1,18 @@
 #include <stdio.h>
+#include <string.h>
 
 #define MAX_ALUNOS 100
 
-typedef struct{
-
+typedef struct {
     char nome[100];
     int idade;
     float nota;
-
-}Aluno;
+} Aluno;
 
 Aluno alunos[MAX_ALUNOS];
 int quantidade = 0;
 
-void mostrarMenu(){
-
+void mostrarMenu() {
     printf("\n=====================================\n");
     printf("      SISTEMA DE CADASTRO DE ALUNOS\n");
     printf("=====================================\n");
@@ -22,99 +20,87 @@ void mostrarMenu(){
     printf("2 - Listar alunos\n");
     printf("3 - Buscar aluno\n");
     printf("0 - Sair\n");
-    printf("Escolha: ");
-
+    printf("=====================================\n");
+    printf("Escolha uma opcao: ");
 }
 
-void cadastrarAluno(){
+void cadastrarAluno() {
 
-    if(quantidade >= MAX_ALUNOS){
-
-        printf("\nLimite de alunos atingido.\n");
+    if (quantidade >= MAX_ALUNOS) {
+        printf("\nLimite de alunos atingido!\n");
         return;
-
     }
 
-    printf("Nome: ");
+    printf("\nNome: ");
     scanf(" %[^\n]", alunos[quantidade].nome);
 
     printf("Idade: ");
-    scanf("%d",&alunos[quantidade].idade);
+    scanf("%d", &alunos[quantidade].idade);
 
     printf("Nota: ");
-    scanf("%f",&alunos[quantidade].nota);
+    scanf("%f", &alunos[quantidade].nota);
 
     quantidade++;
 
     printf("\nAluno cadastrado com sucesso!\n");
-
 }
 
-void listarAlunos(){
+void listarAlunos() {
 
-    if(quantidade==0){
-
+    if (quantidade == 0) {
         printf("\nNenhum aluno cadastrado.\n");
         return;
-
     }
 
-    printf("\n===== ALUNOS CADASTRADOS =====\n");
+    printf("\n========== ALUNOS CADASTRADOS ==========\n");
 
-    for(int i=0;i<quantidade;i++){
+    for (int i = 0; i < quantidade; i++) {
 
-        printf("\nAluno %d\n",i+1);
-        printf("Nome : %s\n",alunos[i].nome);
-        printf("Idade: %d\n",alunos[i].idade);
-        printf("Nota : %.2f\n",alunos[i].nota);
+        printf("\nAluno %d\n", i + 1);
+        printf("Nome : %s\n", alunos[i].nome);
+        printf("Idade: %d\n", alunos[i].idade);
+        printf("Nota : %.2f\n", alunos[i].nota);
 
     }
-
 }
 
-void buscarAluno(){
+void buscarAluno() {
 
     char nomeBusca[100];
     int encontrado = 0;
 
-    printf("Digite o nome: ");
+    printf("\nDigite o nome do aluno: ");
     scanf(" %[^\n]", nomeBusca);
 
-    for(int i=0;i<quantidade;i++){
+    for (int i = 0; i < quantidade; i++) {
 
-        if(strcmp(nomeBusca, alunos[i].nome)==0){
+        if (strcmp(nomeBusca, alunos[i].nome) == 0) {
 
-            printf("\nAluno encontrado!\n");
+            printf("\n===== ALUNO ENCONTRADO =====\n");
             printf("Nome : %s\n", alunos[i].nome);
             printf("Idade: %d\n", alunos[i].idade);
             printf("Nota : %.2f\n", alunos[i].nota);
 
             encontrado = 1;
             break;
-
         }
-
     }
 
-    if(!encontrado){
-
+    if (!encontrado) {
         printf("\nAluno nao encontrado.\n");
-
     }
-
 }
 
-int main(){
+int main() {
 
     int opcao;
 
-    do{
+    do {
 
         mostrarMenu();
+        scanf("%d", &opcao);
 
-        scanf("%d",&opcao);
-
-        switch(opcao){
+        switch (opcao) {
 
             case 1:
                 cadastrarAluno();
@@ -133,12 +119,10 @@ int main(){
                 break;
 
             default:
-                printf("\nOpcao invalida.\n");
-
+                printf("\nOpcao invalida!\n");
         }
 
-    }while(opcao!=0);
+    } while (opcao != 0);
 
     return 0;
-
 }
